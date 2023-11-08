@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { userLogin } from "../actions/user.action";
+import { useNavigate } from 'react-router-dom';
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -8,19 +9,14 @@ export default function SignIn() {
   const [connectionFailed, setConnectionFailed] = useState(false);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(userLogin(email, password));
+    dispatch(userLogin(email, password, navigate));
     setConnectionFailed(false); //promesse
   };
 
-      // if (data) {
-      //   console.log("Connexion réussie !");
-      //   const token = data.body.token;
-      //   console.log("le token", token);
-      //   sessionStorage.setItem("token", token);
-      //   setConnectionFailed(false);
       //   navigate("/user");
       // }
 

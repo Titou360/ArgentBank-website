@@ -21,29 +21,26 @@ export const userLogin = (email, password, navigate) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(userData),
-      })
+      });
 
       const data = await response.json();
 
       if (response.status === 200) {
+        console.log("Connexion réussie !");
         const token = data.body.token;
         sessionStorage.setItem("token", token);
-        navigate("/user")
+        console.log("le token", token);
         dispatch(userLoginSuccess());
-      }
-
-      else if (response.status === 400) {
+        navigate("/user");
+      } else if (response.status === 400) {
         console.log("erreur 400");
         sessionStorage.removeItem("token");
         dispatch(userLoginFailed());
-      }
-
-      else if (response.status === 401) {
+      } else if (response.status === 401) {
         console.log("erreur 401");
         sessionStorage.removeItem("token");
         dispatch(userLoginFailed());
       }
-
     } catch (error) {
       console.error(
         "😒 An error has occurred while recovering the user :",
