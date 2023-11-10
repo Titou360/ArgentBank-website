@@ -1,10 +1,31 @@
-
+import "./accountOwner.css";
+import { useState } from "react";
+import EditUserInfo from "../EditUserInfo";
+import { useSelector } from "react-redux";
 
 export default function AccountOwner() {
-    return (
-        <div className="header">
-          <h1>Welcome back<br />Tony Jarvis!</h1>
-          <button className="edit-button">Edit Name</button>
-        </div>
-    );
-  }
+  const userProfile = useSelector((state) => state.userReducer.userProfile);
+  const [showEditor, setShowEditor] = useState(false);
+
+  const handleNameEditor = () => {
+    setShowEditor(true);
+  };
+
+
+  const userFullName = userProfile ? `${userProfile.firstName} ${userProfile.lastName}` : '';
+
+  return (
+    <div className="header bg-dark">
+      <h1>
+        Welcome back
+        <br />
+        {userFullName}!
+      </h1>
+      <button className="edit-button" onClick={handleNameEditor}>
+        Edit Name
+      </button>
+
+      {showEditor && <EditUserInfo onClose={() => setShowEditor(false)} />}
+    </div>
+  );
+}

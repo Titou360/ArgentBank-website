@@ -15,6 +15,7 @@ body {
 
 .main {
   flex: 1;
+  margin-top: 30px;
 }
 
 .bg-dark {
@@ -153,24 +154,6 @@ body {
   margin-bottom: 0.5rem;
 }
 
-.sign-in-button {
-  display: block;
-  width: 100%;
-  padding: 8px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  margin-top: 1rem;
-  border-color: #00bc77;
-  background-color: #00bc77;
-  color: #fff;
-  cursor: pointer;
-}
-
-.sign-in-button:hover {
-  position: 40px;
-
-}
-
 .sign-in-content {
   box-sizing: border-box;
   background-color: white;
@@ -257,30 +240,14 @@ body {
   flex: 1;
 }
 
-.edit-button {
-  border-color: #00bc77;
-  background-color: #00bc77;
-  color: #fff;
-  font-weight: bold;
-  padding: 10px;
-}
+
 
 .header {
   color: #fff;
   margin-bottom: 2rem;
 }
 
-.transaction-button {
-  display: block;
-  width: 100%;
-  padding: 8px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  margin-top: 1rem;
-  border-color: #00bc77;
-  background-color: #00bc77;
-  color: #fff;
-}
+
 
 @media (min-width: 720px) {
   .account {
@@ -289,10 +256,6 @@ body {
 
   .account-content-wrapper.cta {
     flex: 0;
-  }
-
-  .transaction-button {
-    width: 200px;
   }
 }
 

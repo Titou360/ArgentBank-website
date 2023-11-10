@@ -11,7 +11,7 @@ export default function SignIn() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSignIn = async (e) => {
     e.preventDefault();
     dispatch(userLogin(email, password, navigate));
     setConnectionFailed(false); //promesse
@@ -26,7 +26,7 @@ export default function SignIn() {
       <section className="sign-in-content">
         <i className="fa fa-user-circle sign-in-icon"></i>
         <h1>Sign In</h1>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSignIn}>
           <div className="input-wrapper">
             <label htmlFor="email">Email</label>
             <input

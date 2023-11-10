@@ -8,10 +8,12 @@ import rootReducer from "./reducers";
 
 
 
+
 const store = configureStore({
   reducer: rootReducer,
   devTools: true, // !IMPORTANT, put on false before building
 });
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
