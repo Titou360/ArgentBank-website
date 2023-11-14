@@ -20,4 +20,9 @@
     flex-direction: row;
     gap: 10px;
     font-family: Avenir, Arial, Helvetica, sans-serif;
+    color: #000
+}
+
+#firstName, #lastName {
+    opacity: 0.5;
 }
