@@ -1,4 +1,4 @@
-import "./accountOwner.css";
+import "./style.css";
 import { useState } from "react";
 import EditUserInfo from "../EditUserInfo";
 import { useSelector } from "react-redux";
@@ -11,8 +11,9 @@ export default function AccountOwner() {
     setShowEditor(true);
   };
 
-
-  const userFullName = userProfile ? `${userProfile.firstName} ${userProfile.lastName}` : '';
+  const userFullName = userProfile
+    ? `${userProfile.firstName} ${userProfile.lastName}`
+    : "";
 
   return (
     <div className="header bg-dark">

@@ -1,0 +1,207 @@
+openapi: 3.0.0
+info:
+  title: Bank Argent API documentation
+  description: |-
+    # This is a sample Argent Bank based on the OpenAPI 3.0 specification.
+    
+    Please note that this entire API documentation is based on cents and not dollars.
+    
+    ```100 cents = $1 so please think about dividing by 100 ^^```
+  version: 1.0.0
+  contact:
+    name: API Support
+    email: clement.felices@gmail.com
+
+servers:
+  - url: https://localhost:3001/api/v1
+    description: Production server (uses live data)
+
+tags:
+  - name: transactions
+    description: Operations related to transactions
+
+paths:
+  /account/{account}:
+    get:
+      summary: Retrieve all transactions for the current month
+      description: /!\ Be careful that amount & balance are in cents and not dollars, please divide by 100
+      parameters:
+        - name: account
+          in: path
+          required: true
+          description: User account ID 
+          schema:
+            type: integer
+      security:
+        - bearerAuth: []  
+      responses:
+        '200':
+          description: Correctly retrieved data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account'
+        '401':
+          description: Unauthenticated user
+          content:
+            application/json:
+              example:
+                error: "Unauthorized, please reconnect"  
+        '403':
+          description: Authenticated user but not allowed to retrieve data
+          content:
+            application/json:
+              example:
+                error: "Forbidden"    
+        '404': 
+          description: Not found
+          content:
+            application/json:
+              example:
+                error: "Resource not found" 
+        '500': 
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                error: "Internal server error"  
+
+  /transaction/{transaction}:
+    get:
+      summary: View the details of a transaction
+      description: /!\ Be careful that amount & balance are in cents and not dollars, please divide by 100
+      parameters:
+        - name: transaction
+          in: path
+          required: true
+          description: User transaction ID 
+          schema:
+            type: integer
+      security:
+        - bearerAuth: []  
+      responses:
+        '200':
+          description: Correctly retrieved data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transaction'
+        '401':
+          description: Unauthenticated user
+          content:
+            application/json:
+              example:
+                error: "Unauthorized"  
+        '403':
+          description: Authenticated user but not allowed to retrieve data
+          content:
+            application/json:
+              example:
+                error: "Forbidden"    
+        '404': 
+          description: Not found
+          content:
+            application/json:
+              example:
+                error: "Transaction not found"  
+        '500': 
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                error: "Internal server error"  
+
+    patch:
+      summary: Update specific properties of a transaction
+      parameters:
+        - name: transaction
+          in: path
+          required: true
+          description: User transaction ID 
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateTransactionRequest'
+      security:
+        - bearerAuth: []  
+      responses:
+        '200':
+          description: Transaction updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transaction'
+        '401':
+          description: Unauthenticated user
+          content:
+            application/json:
+              example:
+                error: "Unauthorized"  
+        '403':
+          description: Authenticated user but not allowed to update data
+          content:
+            application/json:
+              example:
+                error: "Forbidden"
+        '404': 
+          description: Transaction not found
+          content:
+            application/json:
+              example:
+                error: "Transaction not found"  
+        '500': 
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                error: "Internal server error"  
+
+components:
+  schemas: 
+    transaction: 
+      properties :
+        transaction_id: 
+          type: string
+        date:
+          type: string
+        description:
+          type: string
+        amount: 
+          type: number
+        transactionType:
+          type: string
+        category: 
+          type: string
+        note:
+          type: string
+          
+    account:
+      properties:
+        account_id:
+          type: string
+        name:
+          type: string
+        totalAmount:
+          type: number
+        balance:
+          type: number
+        transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/transaction'
+  
+    updateTransactionRequest:
+      properties:
+        category: 
+          type: string
+        note:
+          type: string
+  
+  securitySchemes:
+    bearerAuth:  # Définition du schéma d'authentification
+      type: http
+      scheme: bearer

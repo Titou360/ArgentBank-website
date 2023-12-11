@@ -1,14 +1,6 @@
-import { useState } from 'react';
-import accountData from '../../data/accounts.json';
-// import Transaction from "../Transaction/Transaction";
+import accountData from "../../data/accounts.json";
 
 export default function Accounts() {
-  const [isContentVisible, setContentVisible] = useState(false);
-
-  const toggleContent = () => {
-    setContentVisible(!isContentVisible);
-  };
-
   return (
     <main className="main bg-dark">
       <h2 className="sr-only">Accounts</h2>
@@ -17,14 +9,12 @@ export default function Accounts() {
           <div className="account-content-wrapper">
             <h3 className="account-title">{account.title}</h3>
             <p className="account-amount">{account.amount}</p>
-            <p className="account-amount-description">{account.amountDescription}</p>
+            <p className="account-amount-description">
+              {account.amountDescription}
+            </p>
           </div>
           <div className="account-content-wrapper cta">
-            <button onClick={toggleContent} className="transaction-button">View transactions</button>
-
-            {/* {isContentVisible && (
-              <Transaction />
-            )} */}
+            <button className="transaction-button">View transactions</button>
           </div>
         </section>
       ))}

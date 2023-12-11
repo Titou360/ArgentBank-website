@@ -6,6 +6,12 @@
     color: #000;
     gap: 20px;
     padding-top: 20px;
+    width: 80%;
+    max-width: 400px;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 20px;
 }
 
 .EditUserBtn { 

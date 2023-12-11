@@ -8,8 +8,12 @@ const Transaction = (dateTable) => {
     setContentAccountVisible(!isContentAccountVisible);
   };
 
-  const contentContainerClass = `content ${isContentAccountVisible ? "lineDown" : ""}`;
-  const arrowIconClass = `fa-chevron-up ${isContentAccountVisible ? "chevron-open" : ""}`;
+  const contentContainerClass = `content ${
+    isContentAccountVisible ? "lineDown" : ""
+  }`;
+  const arrowIconClass = `fa-chevron-up ${
+    isContentAccountVisible ? "chevron-open" : ""
+  }`;
 
   return (
     <>

@@ -1,8 +1,10 @@
-import Logo from "../../assets/img/argentBankLogo.png";
+import Logo from "../../assets/img/argentBankLogo.webp";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogout, getUserProfile } from "../../actions/user.action";
 import { useEffect } from "react";
+
+import "./style.css";
 
 export default function Navbar() {
   const userProfile = useSelector((state) => state.userReducer.userProfile);
@@ -35,9 +37,9 @@ export default function Navbar() {
         </NavLink>
         <div>
           <nav>
-            <NavLink to="/User" className="main-nav-item">
-              <i className="fa fa-user-circle"></i>
-              {userProfile ? userProfile.firstName : "Loading..."}
+            <NavLink to="/Profile" className="main-nav-item">
+              <i className="fa-solid fa-circle-user"></i>
+              {userProfile ? userProfile.userName : "Loading..."}
             </NavLink>
             <NavLink to="/" onClick={handleLogout} className="main-nav-item">
               <i className="fa fa-sign-out"></i>
@@ -59,8 +61,8 @@ export default function Navbar() {
           <h1 className="sr-only">Argent Bank</h1>
         </NavLink>
         <div>
-          <NavLink to="/SignIn" className="main-nav-item">
-            <i className="fa fa-sign-in"></i>
+          <NavLink to="/Login" className="main-nav-item">
+            <i className="fa fa-circle-user"></i>
             Sign In
           </NavLink>
         </div>

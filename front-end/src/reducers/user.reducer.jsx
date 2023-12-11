@@ -6,9 +6,10 @@ import {
   SET_USER_PROFILE,
 } from "../actions/user.action";
 
-// État initial
+// Initial State declaration
 const initialState = {
   userProfile: {},
+  error: null,
 };
 
 // Reducer
@@ -18,11 +19,13 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         userProfile: action.payload,
+        error: null,
       };
     case USER_LOGIN_FAILED:
       return {
         ...state,
-        userProfile:"",
+        userProfile: "",
+        error: action.payload,
       };
     case USER_LOGOUT:
       return {

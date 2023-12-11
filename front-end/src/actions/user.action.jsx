@@ -5,13 +5,15 @@ export const USER_LOGIN_ERROR = "USER_LOGIN_ERROR";
 export const SET_USER_PROFILE = "SET_USER_PROFILE";
 
 // Action to manage the success user login
-export const userLoginSuccess = () => ({
+export const userLoginSuccess = (userData) => ({
   type: USER_LOGIN_SUCCESS,
+  payload: userData,
 });
 
 // Action to manage the user login failed
-export const userLoginFailed = () => ({
+export const userLoginFailed = (error) => ({
   type: USER_LOGIN_FAILED,
+  payload: error,
 });
 
 // Action to manage user disconnection
@@ -39,28 +41,19 @@ export const userLogin = (email, password, navigate) => {
       const data = await response.json();
 
       if (response.status === 200) {
-        console.log("Connexion réussie !");
         const token = data.body.token;
         sessionStorage.setItem("token", token);
-        console.log("le token est ", token);
-        navigate("/user");
-        dispatch(userLoginSuccess());
+        navigate("/profile");
+        dispatch(userLoginSuccess(userData));
         dispatch(getUserProfile());
-      } else if (response.status === 400) {
-        console.log("erreur 400");
+      } else if (response.status === 400 || response.status === 401) {
         sessionStorage.removeItem("token");
-        dispatch(userLoginFailed());
-      } else if (response.status === 401) {
-        console.log("erreur 401");
-        sessionStorage.removeItem("token");
-        dispatch(userLoginFailed());
+        dispatch(
+          userLoginFailed("Invalide Email or Password. Please Try again")
+        );
       }
     } catch (error) {
-      console.error(
-        "😒 An error has occurred while recovering the user :",
-        error
-      );
-      throw error;
+      dispatch(userLoginFailed("Invalid Email or Password. Please retry"));
     }
   };
 };
@@ -73,7 +66,6 @@ export const getUserProfile = () => {
 
       // Manage if token is not available
       if (!token) {
-
         return;
       }
 
@@ -118,7 +110,6 @@ export const editUserName = (newUserName) => {
 
       // Manage if token is not available
       if (!token) {
-
         return;
       }
 
@@ -130,7 +121,7 @@ export const editUserName = (newUserName) => {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
-          body : JSON.stringify({userName : newUserName}),
+          body: JSON.stringify({ userName: newUserName }),
         }
       );
 

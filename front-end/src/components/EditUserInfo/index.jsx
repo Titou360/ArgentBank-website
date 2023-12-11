@@ -3,7 +3,7 @@ import Button from "../Button";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { editUserName, getUserProfile } from "../../actions/user.action";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 const EditUserInfo = ({ onClose }) => {
   const userProfile = useSelector((state) => state.userReducer.userProfile);
@@ -58,20 +58,26 @@ const EditUserInfo = ({ onClose }) => {
           value={userProfile.lastName}
           readOnly // Pour rendre le champ en lecture seule
           autoComplete="section-edit lastName"
-          placeholder="TEST3"
         />
       </div>
 
       <div className="EditUserBtn">
-        <Button className="btn-edituserinfo" title="Save" onClick={handleEditUserName} />
-        <Button className="btn-edituserinfo" title="Cancel" onClick={handleCancel} />
+        <Button
+          className="btn-edituserinfo"
+          title="Save"
+          onClick={handleEditUserName}
+        />
+        <Button
+          className="btn-edituserinfo"
+          title="Cancel"
+          onClick={handleCancel}
+        />
       </div>
     </div>
   );
 };
 
 export default EditUserInfo;
-
 
 EditUserInfo.propTypes = {
   onClose: PropTypes.func.isRequired,

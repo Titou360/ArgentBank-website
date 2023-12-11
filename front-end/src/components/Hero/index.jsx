@@ -1,8 +1,7 @@
+import "./style.css";
+import PropTypes from "prop-types";
 
-import PropTypes from 'prop-types';
-
-export default function Hero({title, subtitles, text}) {
-
+export default function Hero({ title, subtitles, text }) {
   return (
     <div className="hero">
       <section className="hero-content">
